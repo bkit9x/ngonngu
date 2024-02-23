@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    textarea{
+      width: 100%;
+    }
+  </style>
+<style>
+  button{
+    background-color: #03a9f4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  button:hover {
+    background-color: #0288d1;
+  }
+</style>
+
+</head>
+<body>
+  <h1></h1>
+  <textarea id="input" name="input" cols="30" rows="10"></textarea>
+ <button id="btn">Xử lý</button>
+  <div id="output"></div>
+
+
+
+<script>
+
+// hàm xuly() để tách một chuỗi thành một mảng các từ
+// ví dụ
+
+// hàm xuly() để tách một chuỗi thành một mảng các từ
+function xuly(chuoi) {
+  // loại bỏ các kí tự không phải là chữ cái hoặc số bằng biểu thức chính quy
+ // chuoi = chuoi.replace(/[^A-Za-z0-9]/g, " ");
+  // tách chuỗi bằng kí tự khoảng trắng
+  let mang = chuoi.split(" ");
+  // loại bỏ các phần tử rỗng trong mảng
+  mang = mang.filter((tu) => tu !== "");
+  // trả về mảng các từ
+  return mang;
+}
+
+// hàm đếm số lần xuất hiện của mỗi từ trong một chuỗi
+function dem(chuoi) {
+  // gọi hàm xuly() để tách chuỗi thành mảng các từ
+  let mang = xuly(chuoi);
+  // khởi tạo một đối tượng để lưu số lần xuất hiện của mỗi từ
+  let doi_tuong = {};
+  // duyệt qua mảng các từ
+  for (let tu of mang) {
+    // nếu từ đã có trong đối tượng
+    if (tu in doi_tuong) {
+      // tăng số lần xuất hiện lên 1
+      doi_tuong[tu]++;
+    }
+    // nếu từ chưa có trong đối tượng
+    else {
+      // gán số lần xuất hiện là 1
+      doi_tuong[tu] = 1;
+    }
+  }
+  // trả về đối tượng
+  return doi_tuong;
+}
+
+// hàm sắp xếp từ lớn đến nhỏ theo số lần xuất hiện
+function sap_xep(chuoi) {
+  // gọi hàm dem() để lấy đối tượng số lần xuất hiện của mỗi từ
+  let doi_tuong = dem(chuoi);
+  // chuyển đổi đối tượng thành một mảng các mảng con gồm từ và số lần xuất hiện
+  let mang = Object.entries(doi_tuong);
+  // sắp xếp mảng theo số lần xuất hiện giảm dần
+  mang.sort((a, b) => b[1] - a[1]);
+  // đảo ngược mảng để sắp xếp theo số lần xuất hiện tăng dần
+  //mang.reverse();
+  // trả về mảng đã sắp xếp
+  return mang;
+}
+
+// hàm xuất ra chuỗi các từ đã sắp xếp
+function xuat_ra(chuoi) {
+  // gọi hàm sap_xep() để lấy mảng các từ đã sắp xếp
+  let mang = sap_xep(chuoi);
+  // khởi tạo một chuỗi rỗng
+  let ket_qua = "";
+  // duyệt qua mảng
+  for (let i = 0; i < mang.length; i++) {
+    // lấy từ và số lần xuất hiện từ mảng con
+    let tu = mang[i][0];
+    let so_lan = mang[i][1];
+    // nối từ và số lần xuất hiện vào chuỗi kết quả
+    ket_qua += tu + ":" +so_lan + "\n";
+  }
+  // trả về chuỗi kết quả
+  return ket_qua;
+}
+
+var btn = document.getElementById("btn");
+var input = document.getElementById("input");
+var output = document.getElementById("output");
+
+function runn(){
+let a =  xuat_ra(input.value.replace(/\n/g, " "));
+console.log(a)
+output.innerText=a;
+}
+btn.addEventListener("click",runn);
+
+</script>
+
+
+</body>
+</html>

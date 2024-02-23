@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    textarea{
+      width: 100%;
+    }
+  </style>
+<style>
+  button{
+    background-color: #03a9f4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  button:hover {
+    background-color: #0288d1;
+  }
+</style>
+
+</head>
+<body>
+  <h1>công cụ xóa các kí tự lạ</h1>
+  <textarea id="input" name="input" cols="30" rows="10"></textarea>
+ <button id="btn">Xử lý</button>
+  <textarea id="output" name="output" cols="30" rows="10"></textarea>
+
+
+
+<script>
+  // hàm kiểm tra kí tự có dấu
+function is_accented(char) {
+  // danh sách các kí tự có dấu
+  let accented_chars =
+    "àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆĐÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ ";
+  // trả về true nếu kí tự có trong danh sách, false nếu không
+  return accented_chars.includes(char);
+}
+
+// hàm xóa các kí tự không mong muốn
+function remove_unwanted_characters(text) {
+  // khởi tạo chuỗi kết quả rỗng
+  let result = "";
+  // duyệt qua từng kí tự trong chuỗi
+  for (let char of text) {
+    // nếu kí tự là chữ cái hoặc số hoặc kí tự có dấu
+    if (char.match(/[a-z0-9\n]/i) || is_accented(char)) {
+      // thêm kí tự vào chuỗi kết quả
+      result += char;
+    }
+  }
+  // trả về chuỗi kết quả
+  return result;
+}
+
+// ví dụ
+
+function XuLy(){
+  output.value = remove_unwanted_characters(input.value);
+  
+}
+var input = document.getElementById("input");
+var output = document.getElementById("output");
+var btn = document.getElementById("btn");
+btn.addEventListener("click",XuLy);
+
+</script>
+
+
+</body>
+</html>

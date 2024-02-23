@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    textarea{
+      width: 100%;
+    }
+  </style>
+<style>
+  button{
+    background-color: #03a9f4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  button:hover {
+    background-color: #0288d1;
+  }
+</style>
+
+</head>
+<body>
+  <h1></h1>
+  <textarea id="input"></textarea>
+<button onclick="toUpperCase()">Chuyển thành chữ hoa</button>
+<button onclick="toLowerCase()">Chuyển thành chữ thường</button>
+<button onclick="toTitleCase()">Chuyển thành dạng title</button>
+
+
+
+<script>
+function toTitleCase() {
+  var text = document.getElementById("input").value;
+  var words = text.split(" ");
+  for (var i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].slice(1);
+  }
+  document.getElementById("input").value = words.join(" ");
+}
+function toLowerCase() {
+  var text = document.getElementById("input").value;
+  document.getElementById("input").value = text.toLowerCase();
+}
+function toUpperCase() {
+  var text = document.getElementById("input").value;
+  document.getElementById("input").value = text.toUpperCase();
+}
+
+</script>
+
+
+</body>
+</html>

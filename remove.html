@@ -1,0 +1,30 @@
+// hàm kiểm tra kí tự có dấu
+function is_accented(char) {
+  // danh sách các kí tự có dấu
+  let accented_chars =
+    "àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆĐÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ";
+  // trả về true nếu kí tự có trong danh sách, false nếu không
+  return accented_chars.includes(char);
+}
+
+// hàm xóa các kí tự không mong muốn
+function remove_unwanted_characters(text) {
+  // khởi tạo chuỗi kết quả rỗng
+  let result = "";
+  // duyệt qua từng kí tự trong chuỗi
+  for (let char of text) {
+    // nếu kí tự là chữ cái hoặc số hoặc kí tự có dấu
+    if (char.match(/[a-z0-9]/i) || is_accented(char)) {
+      // thêm kí tự vào chuỗi kết quả
+      result += char;
+    }
+  }
+  // trả về chuỗi kết quả
+  return result;
+}
+
+// ví dụ
+let text =
+  "Xin chào, đây là Copilot. Tôi có thể giúp bạn tạo ra một đoạn code Python để xóa các kí tự khác kí tự a-z 0-9 và các kí tự khác kí tự có dấu của tiếng Việt như ă á à ả ....";
+console.log(text);
+console.log(remove_unwanted_characters(text));
